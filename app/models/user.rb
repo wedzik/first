@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation, :first_name
   attr_accessor :password
 
   before_save :encrypt_password
@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_uniqueness_of :email
+  validates_length_of :first_name, minimum: 6
 
   def self.authenticate(email, password)
     user  = find_by_email(email)

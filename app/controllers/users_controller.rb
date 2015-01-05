@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    if current_user
+      redirect_to profile_path
+    else
+      @user = User.new
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   def create
@@ -10,5 +18,32 @@ class UsersController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def show
+    @user ||= User.find(params[:id])
+  end
+
+  def profile
+    if current_user
+      @user ||= User.find(current_user.id)
+    else
+      redirect_to log_in_path
+    end
+  end
+
+  def update
+    @user ||= User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        flash[:notice] = "Saved"
+      end
+      format.js
+    end
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name)
   end
 end

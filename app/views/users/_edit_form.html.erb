@@ -1,0 +1,26 @@
+<h1>Edit user</h1>
+<%= form_for @user, remote:true do |f|  %>
+    <% flash.each do |name, msg| %>
+        <%=  content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+    <% if @user.errors.any? %>
+        <div class="error_messages">
+          <ul>
+            <% for message in @user.errors.full_messages %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table>
+      <tr>
+        <td><%= f.label :email %></td>
+        <td><%= f.text_field :email,:readonly => true %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :first_name %></td>
+        <td><%= f.text_field :first_name%></td>
+      </tr>
+    </table>
+    <p class="button"><%= f.submit "Save"%></p>
+<% end %>
