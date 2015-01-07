@@ -13,5 +13,12 @@
   <dd><%= @user.age %></dd>
 </dl>
 <div class="form-actions">
-  <%= link_to t('.edit', :default => t("Update profile")), edit_user_path(:id => current_user.id), :class => 'btn' %>
+  <%= link_to t('.edit', :default => t("Update profile")), update_profile_path(:id => current_user.id),
+              {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, :class => 'btn' %>
 </div>
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<script lang="" >
+    $('#modal-window').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+</script>

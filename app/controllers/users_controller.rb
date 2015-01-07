@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 
   def profile
     if current_user
+      flash.now[:notice] = ""
       @user ||= User.find(current_user.id)
     else
       redirect_to log_in_path
@@ -38,6 +39,13 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         flash[:notice] = "Saved"
       end
+      format.js
+    end
+  end
+
+  def   update_profile
+    @user ||= User.find(params[:id])
+    respond_to do |format|
       format.js
     end
   end
