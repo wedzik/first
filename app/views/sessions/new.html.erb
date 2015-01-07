@@ -1,12 +1,22 @@
-<h1>Log in</h1>
-<%= form_tag sessions_path do %>
-    <p>
-      <%= label_tag :email %><br/>
-      <%= text_field_tag :email, params[:email] %>
-    </p>
-    <p>
-      <%= label_tag :password %><br/>
-      <%= password_field_tag :password %>
-    </p>
-    <p class="button"><%= submit_tag "Enter" %></p>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => ['Log in'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= form_tag sessions_path, :html => { :class => 'form-horizontal' } do %>
+    <div class="control-group">
+      <%= label_tag :email, nil, class: 'control-label' %>
+      <div class="controls">
+        <%= text_field_tag :email, params[:email], :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= label_tag :password, nil, class: 'control-label' %>
+      <div class="controls">
+        <%= password_field_tag :password, :class => 'password_field' %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= submit_tag "Enter", :class => 'btn btn-primary' %>
+    </div>
 <% end %>
+
