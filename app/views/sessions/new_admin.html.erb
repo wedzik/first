@@ -1,8 +1,8 @@
 <%- model_class = User -%>
 <div class="section-title">
-  <h1><%=t '.title', :default => ['Log in'], :model => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '.title', :default => ['Admin Log in'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-<%= form_tag sessions_path, :html => { :class => 'form-horizontal' } do %>
+<%= form_tag log_in_admin_path, :html => { :class => 'form-horizontal' } do %>
     <div class="control-group">
       <%= label_tag :email, nil, class: 'control-label' %>
       <div class="controls">

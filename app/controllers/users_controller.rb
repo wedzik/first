@@ -26,6 +26,10 @@ class UsersController < ApplicationController
 
   def profile
     if current_user
+      if current_user.is_a? Admin
+        redirect_to admin_profile_path
+        return
+      end
       flash.now[:notice] = ""
       @user ||= User.find(current_user.id)
     else

@@ -20,13 +20,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-  gem 'jquery-rails'
-
 # To use ActiveModel has_secure_password
-  gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
-  gem 'twitter-bootstrap-rails'
-
-  gem 'yaml_db'
+gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
+gem 'jquery-rails'
+gem 'twitter-bootstrap-rails'
+gem 'yaml_db'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

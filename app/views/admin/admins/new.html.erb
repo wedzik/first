@@ -1,12 +1,12 @@
-<%- model_class = User -%>
+<%- model_class = Admin -%>
 <div class="section-title">
   <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'],
            :model => model_class.model_name.human.titleize %></h1>
 </div>
-<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
-    <% if @user.errors.any? %>
+<%= form_for @admin, :url => admin_admins_path, :html => { :class => 'form-horizontal' } do |f| %>
+    <% if @admin.errors.any? %>
         <div class="alert alert-danger" role="alert">
-          <% for message in @user.errors.full_messages %>
+          <% for message in @admin.errors.full_messages %>
               <p><%= message %></p>
           <% end %>
         </div>
