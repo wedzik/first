@@ -4,7 +4,7 @@ First::Application.routes.draw do
     get "profile" => "admins#profile", :as => "profile"
     get "update_profile" => "admins#update_profile", :as => "update_profile"
     put "update_profile" => "admins#update"
-    resources :admins, except: [:new, :edit, :show, :update, :index]
+    resources :admins, except: [git:edit, :show, :update, :index]
   end
 
 

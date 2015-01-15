@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include User_auth
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age
   attr_accessor :password
 
@@ -12,19 +13,5 @@ class User < ActiveRecord::Base
   validates_length_of :last_name, minimum: 3, allow_blank: true
   validates_numericality_of :age, only_integer: true, greater_than: 10, allow_blank: true
 
-  def self.authenticate(email, password)
-    user  = find_by_email(email)
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-      user
-    else
-      nil
-    end
-  end
 
-  def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    end
-  end
 end

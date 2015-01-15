@@ -35,7 +35,7 @@ class Admin::AdminsController < ApplicationController
   def create
     @admin = Admin.new(params[:admin])
     if @admin.save
-      redirect_to new_admin_admin_path, :notice => "Signed up!"
+      redirect_to admin_sign_up_path, :notice => "Signed up!"
     else
       render "new"
     end
