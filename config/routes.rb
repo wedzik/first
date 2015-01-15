@@ -2,6 +2,7 @@ First::Application.routes.draw do
   namespace :admin do
     get "sign_up" => "admins#new", :as => "sign_up"
     get "profile" => "admins#profile", :as => "profile"
+    get "update_profile" => "admins#update_profile", :as => "update_profile"
     resources :admins
   end
 
@@ -18,6 +19,6 @@ First::Application.routes.draw do
   get "profile" => "users#profile", :as => "profile"
 
   root :to => "users#new"
-  resources :users
+  resources :users, except: [:edit]
   resources :sessions
 end

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :require_admin_login , only: [:destroy, :index]
+
   def new
     if current_user
       redirect_to profile_path
@@ -7,8 +9,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
+  def index
+    @users = User.all
   end
 
   def create
@@ -47,10 +49,20 @@ class UsersController < ApplicationController
     end
   end
 
-  def   update_profile
+  def update_profile
     @user ||= User.find(params[:id])
     respond_to do |format|
       format.js
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :no_content }
     end
   end
 

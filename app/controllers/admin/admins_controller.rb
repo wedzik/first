@@ -1,6 +1,6 @@
 class Admin::AdminsController < ApplicationController
 
-  before_filter :require_admin_login , only: [:profile, :edit, :show]
+  before_filter :require_admin_login , only: [:profile, :edit, :show, :update_profile, :update]
 
   def new
     if current_user
@@ -10,9 +10,26 @@ class Admin::AdminsController < ApplicationController
     end
   end
 
+  def update
+    @admin ||= User.find(params[:id])
+    respond_to do |format|
+      if @admin.update_attributes(params[:admin])
+        flash[:notice] = "Saved"
+      end
+      format.js
+    end
+  end
+
   def profile
       flash.now[:notice] = ""
       @admin ||= Admin.find(current_user.id)
+  end
+
+  def update_profile
+    @admin ||= Admin.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
@@ -32,11 +49,4 @@ class Admin::AdminsController < ApplicationController
     @admin ||= Admin.find(params[:id])
   end
 
-  private
-  def require_admin_login
-    unless current_user && (current_user.is_a? Admin)
-      flash[:error] = "You must be logged in as admin to access this section"
-      redirect_to root_path
-    end
-  end
 end

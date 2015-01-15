@@ -1,0 +1,9 @@
+<%- model_class = Admin -%>
+<div class="modal-body">
+    <div class="section-title">
+      <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+    </div>
+    <div id="ajax_form">
+      <%= render :partial => 'edit_form' %>
+    </div>
+</div>
