@@ -1,6 +1,6 @@
 class Admin::AdminsController < ApplicationController
 
-  before_filter :require_admin_login , only: [:profile, :edit, :show, :update_profile, :update]
+  before_filter :require_admin_login , only: [:profile, :update_profile, :update]
 
   def new
     if current_user
@@ -11,7 +11,7 @@ class Admin::AdminsController < ApplicationController
   end
 
   def update
-    @admin ||= User.find(params[:id])
+    @admin ||= current_user
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
         flash[:notice] = "Saved"
@@ -22,18 +22,14 @@ class Admin::AdminsController < ApplicationController
 
   def profile
       flash.now[:notice] = ""
-      @admin ||= Admin.find(current_user.id)
+      @admin ||= current_user
   end
 
   def update_profile
-    @admin ||= Admin.find(params[:id])
+    @admin ||= current_user
     respond_to do |format|
       format.js
     end
-  end
-
-  def edit
-    @admin = Admin.find(params[:id])
   end
 
   def create
@@ -43,10 +39,6 @@ class Admin::AdminsController < ApplicationController
     else
       render "new"
     end
-  end
-
-  def show
-    @admin ||= Admin.find(params[:id])
   end
 
 end

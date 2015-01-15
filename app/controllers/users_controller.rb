@@ -22,10 +22,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user ||= User.find(params[:id])
-  end
-
   def profile
     if current_user
       if current_user.is_a? Admin
