@@ -1,4 +1,4 @@
-module User_auth
+module UserAuth
   def self.included(base)
     base.extend(ClassMethods)
   end

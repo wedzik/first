@@ -1,5 +1,5 @@
 class Admin < ActiveRecord::Base
-  include User_auth
+  include UserAuth
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age
   attr_accessor :password
 

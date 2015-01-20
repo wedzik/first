@@ -1,11 +1,11 @@
 First::Application.routes.draw do
-  namespace :admin do
-    get "sign_up" => "admins#new", :as => "sign_up"
-    get "profile" => "admins#profile", :as => "profile"
-    get "update_profile" => "admins#update_profile", :as => "update_profile"
-    put "update_profile" => "admins#update"
-    resources :admins, except: [:edit, :show, :update, :index]
-  end
+  #namespace :admin do
+    #get "sign_up" => "admins#new", :as => "sign_up"
+    #get "profile" => "admins#profile", :as => "profile"
+    #get "update_profile" => "admins#update_profile", :as => "update_profile"
+    #put "update_profile" => "admins#update"
+    #resources :admins, except: [:edit, :show, :update, :index]
+  #end
 
 
   get "log_in" => "sessions#new", :as => "log_in"
