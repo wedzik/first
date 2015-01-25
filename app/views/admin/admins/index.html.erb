@@ -1,4 +1,4 @@
-<%- model_class = User -%>
+<%- model_class = Admin -%>
 <div class="section-title">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -13,19 +13,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% @admins.each do |admin| %>
       <tr>
-        <td><%= link_to user.id, user_path(user) %></td>
-        <td><%= user.email %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
+        <td><%= admin.id %></td>
+        <td><%= admin.email %></td>
+        <td><%= admin.first_name %></td>
+        <td><%= admin.last_name %></td>
         <td>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      user_path(user),
+                      admin_admin_path(admin),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
-          <%= link_to t('.Reset password'), reset_password_path(user), :class => 'btn btn-mini btn-info' %>
         </td>
       </tr>
     <% end %>

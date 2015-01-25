@@ -12,5 +12,4 @@ class Admin < ActiveRecord::Base
   validates_length_of :first_name, minimum: 3, allow_blank: true
   validates_length_of :last_name, minimum: 3, allow_blank: true
   validates_numericality_of :age, only_integer: true, greater_than: 10, allow_blank: true
-
 end

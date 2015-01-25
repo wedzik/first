@@ -1,0 +1,37 @@
+<%= form_for @super_admin, :url => admin_super_update_profile_path, remote:true, :html => { :class => 'form-horizontal' } do |f| %>
+    <%= bootstrap_flash %>
+    <% if @super_admin.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <% for message in @super_admin.errors.full_messages %>
+              <p><%= message %></p>
+          <% end %>
+        </div>
+    <% end %>
+    <div class="control-group">
+        <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'text_field',:readonly => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :first_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :first_name, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :last_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :last_name, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :age, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :age, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Save", :class => 'btn btn-primary' %>
+    </div>
+<% end %>

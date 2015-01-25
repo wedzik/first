@@ -1,9 +1,14 @@
 class SessionsController < ApplicationController
+
   def new
   end
 
   def new_admin
     render "new_admin"
+  end
+
+  def new_super_admin
+    render "new_super_admin"
   end
 
   def create
@@ -28,7 +33,19 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_super_admin
+    super_admin = SuperAdmin.authenticate(params[:email], params[:password])
+    if super_admin
+      session[:super_admin_id] = super_admin.id
+      redirect_to admin_admins_url, :notice => "Logged in as SUPER Admin!"
+    else
+      flash.now.alert = "Invalid super admin email or password"
+      render "new_super_admin"
+    end
+  end
+
   def destroy
+    session[:super_admin_id] = nil
     session[:admin_id] = nil
     session[:user_id] = nil
     redirect_to root_url, :notice => "Logged out!"

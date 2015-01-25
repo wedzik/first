@@ -25,6 +25,7 @@ gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'yaml_db'
+gem 'cancan'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

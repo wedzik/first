@@ -52,8 +52,12 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if current_user
-                   if current_user.is_a? Admin  %>
-                    <li><span style="padding:10px 15px; display: block">Logged in as <span admin=""></span> <%= current_user.email %></span></li>
+                   if current_user.is_a? SuperAdmin %>
+                      <li><span style="padding:10px 15px; display: block">Logged in as Super Admin<span admin=""></span> <%= current_user.email %></span></li>
+                      <li><%= link_to "Log out", log_out_path %></li>
+                      <li><%= link_to "Profile", profile_path %></li>
+                <% elsif current_user.is_a? Admin  %>
+                    <li><span style="padding:10px 15px; display: block">Logged in as Admin<span admin=""></span> <%= current_user.email %></span></li>
                     <li><%= link_to "Log out", log_out_path %></li>
                     <li><%= link_to "Profile", profile_path %></li>
                 <% else %>
@@ -80,9 +84,11 @@
             <%= yield %>
           </div>
         </div><!--/row-->
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
     </div> <!-- /container -->
+      <footer class="footer">
+        <div class="container">
+           <p>&copy; Company 2015</p>
+        </div>
+      </footer>
   </body>
 </html>
