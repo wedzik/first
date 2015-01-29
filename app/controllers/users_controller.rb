@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #before_filter :require_admin_login , only: [:destroy, :index]
 
   def new
     if current_user
@@ -10,17 +9,38 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    authorize! :index, @users.first
+    if params[:order]
+      if  params[:direction] == 'up'
+        @users = User.order(params[:order]+ " ASC")
+        @direction = 'down'
+      else
+        @users = User.order(params[:order]+ " DESC")
+        @direction = 'up'
+      end
+      @current = params[:order]
+      #@current_order =
+    else
+      @users = User.all
+      @current = 'id'
+      @direction = 'up'
+    end
+    #order_by :date
+    authorize! :index, User.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
     @user = User.new(params[:user])
-    if @user.save
-      redirect_to root_url, :notice => "Signed up!"
-    else
-      render "new"
-    end
+      if @user.save
+        #flash.now[:notice] = "Signed up!"
+        redirect_to log_in_path, :notice => "Signed up!"
+      else
+        render "new.js"
+        #format.js
+      end
   end
 
   def profile
@@ -81,8 +101,4 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-  def user_params
-    params.require(:user).permit(:first_name)
-  end
 end

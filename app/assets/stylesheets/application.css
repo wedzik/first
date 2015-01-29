@@ -59,3 +59,19 @@ body {
 dd {
     min-height: 20px;
 }
+
+.order-down{
+    background:url(arrow_medium_down.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.order-up{
+    background:url(arrow_medium_up.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.table-striped thead a{
+    padding-right: 18px;
+}

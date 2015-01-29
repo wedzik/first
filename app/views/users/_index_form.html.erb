@@ -1,0 +1,33 @@
+<%- model_class = User -%>
+<div class="section-title">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= link_to 'ID', users_path(order: 'id', current: @current, direction: @direction), :remote => true, :id => "user-id-header" %></th>
+      <th><%= link_to 'Email', users_path(order: 'email', current: @current, direction: @direction), :remote => true, :id => "user-email-header" %></th>
+      <th><%= link_to 'First name', users_path(order: 'first_name', current: @current, direction: @direction), :remote => true, :id => "user-first_name-header"  %></th>
+      <th><%= link_to 'Last name', users_path(order: 'last_name', current: @current, direction: @direction), :remote => true, :id => "user-last_name-header"  %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      user_path(user),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+          <%= link_to t('.Reset password'), reset_password_path(user), :class => 'btn btn-mini btn-info' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
