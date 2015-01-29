@@ -3,8 +3,27 @@ class Admin::AdminsController < ApplicationController
 #  before_filter :require_super_admin_login , only: [:new, :index, :create, :destroy]
 
   def index
-    @admins = Admin.find_all_by_type 'Admin'
-    authorize! :index, @admins.first()
+#    @admins = Admin.find_all_by_type 'Admin'
+
+    if params[:order]
+      if  params[:direction] == 'up'
+        @admins = Admin.order(params[:order]+ " ASC")
+        @direction = 'down'
+      else
+        @admins = Admin.order(params[:order]+ " DESC")
+        @direction = 'up'
+      end
+      @current = params[:order]
+    else
+      @admins = Admin.all
+      @current = 'id'
+      @direction = 'up'
+    end
+    authorize! :index, Admin.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
