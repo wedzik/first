@@ -11,23 +11,48 @@ class UsersController < ApplicationController
   def index
     if params[:order]
       if  params[:direction] == 'up'
-        @users = User.order(params[:order]+ " ASC")
+        @users = User.paginate(:page => params[:page]).order(params[:order]+ " ASC")
         @direction = 'down'
       else
-        @users = User.order(params[:order]+ " DESC")
+        @users = User.paginate(:page => params[:page]).order(params[:order]+ " DESC")
         @direction = 'up'
       end
       @current = params[:order]
-      #@current_order =
     else
-      @users = User.all
+      @users = User.paginate(:page => params[:page]).order("position")
       @current = 'id'
       @direction = 'up'
     end
-    #order_by :date
     authorize! :index, User.new
     respond_to do |format|
       format.html
+      format.js
+    end
+  end
+
+  def drag
+    positions = []
+    items = []
+    params.each do |key, value|
+      if (key.to_s.match(/^(\d)+$/))
+        positions << value
+        items << User.find(key.to_s.to_i);
+      end
+    end
+    positions.sort!
+    i=0;
+    items.each do |user|
+      if(user.position != positions[i])
+        user.position = positions[i]
+        user.save
+      end
+      i+=1
+    end
+
+    @users = User.paginate(:page => params[:page]).order("position")
+    @current = 'id'
+    @direction = 'up'
+    respond_to do |format|
       format.js
     end
   end

@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th><%= link_to '#', users_path(order: 'position', current: @current, direction: @direction), :remote => true, :id => "user-position-header" %></th>
       <th><%= link_to 'ID', users_path(order: 'id', current: @current, direction: @direction), :remote => true, :id => "user-id-header" %></th>
       <th><%= link_to 'Email', users_path(order: 'email', current: @current, direction: @direction), :remote => true, :id => "user-email-header" %></th>
       <th><%= link_to 'First name', users_path(order: 'first_name', current: @current, direction: @direction), :remote => true, :id => "user-first_name-header"  %></th>
@@ -12,9 +13,12 @@
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody  id="sortable">
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.position %>
+          <input type="hidden" name="<%= user.id %>" value="<%= user.position %>"/>
+        </td>
         <td><%= user.id %></td>
         <td><%= user.email %></td>
         <td><%= user.first_name %></td>
@@ -31,3 +35,24 @@
     <% end %>
   </tbody>
 </table>
+<div class="apple_pagination">
+  <%= ajax_will_paginate @users %>
+</div>
+<script language="JavaScript">
+    $(function() {
+        //$( "#sortable" ).sortable();
+        $("#sortable").sortable({
+            update: function( event, ui ) {
+                    test = "adasd";
+                    var items = $("#sortable :input").serialize();
+                            $.ajax({
+                                type: "POST",
+                                url: "<%= users_url %>",
+                                data: items,
+                            });
+                        }
+                    })
+        $( "#sortable" ).disableSelection();
+    });
+</script>
+

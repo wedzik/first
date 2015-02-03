@@ -5,16 +5,18 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= link_to 'ID', admin_admins_path(order: 'id', current: @current, direction: @direction), :remote => true, :id => "user-id-header" %></th>
-    <th><%= link_to 'Email', admin_admins_path(order: 'email', current: @current, direction: @direction), :remote => true, :id => "user-email-header" %></th>
-    <th><%= link_to 'First name', admin_admins_path(order: 'first_name', current: @current, direction: @direction), :remote => true, :id => "user-first_name-header"  %></th>
-    <th><%= link_to 'Last name', admin_admins_path(order: 'last_name', current: @current, direction: @direction), :remote => true, :id => "user-last_name-header"  %></th>
+    <th><%= link_to '#',  admin_admins_path(order: 'position', current: @current, direction: @direction), :remote => true, :id => "admin-position-header" %></th>
+    <th><%= link_to 'ID', admin_admins_path(order: 'id', current: @current, direction: @direction), :remote => true, :id => "admin-id-header" %></th>
+    <th><%= link_to 'Email', admin_admins_path(order: 'email', current: @current, direction: @direction), :remote => true, :id => "admin-email-header" %></th>
+    <th><%= link_to 'First name', admin_admins_path(order: 'first_name', current: @current, direction: @direction), :remote => true, :id => "admin-first_name-header"  %></th>
+    <th><%= link_to 'Last name', admin_admins_path(order: 'last_name', current: @current, direction: @direction), :remote => true, :id => "admin-last_name-header"  %></th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
   <tbody>
   <% @admins.each do |admin| %>
       <tr>
+        <td><%= admin.position %></td>
         <td><%= admin.id %></td>
         <td><%= admin.email %></td>
         <td><%= admin.first_name %></td>

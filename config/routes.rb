@@ -33,6 +33,7 @@ First::Application.routes.draw do
 
   get "update_profile" => "users#update_profile", :as => "update_profile"
 
+  post "users" => "users#drag"
   resources :users, except: [:new, :edit, :show]
   root :to => "users#new"
 end

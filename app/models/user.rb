@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   include UserAuth
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age, :position
   attr_accessor :password
+  self.per_page = 7
 
   before_save :encrypt_password
 
