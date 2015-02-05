@@ -31,6 +31,14 @@ class Admin::AdminsController < ApplicationController
       authorize! :new, @admin
   end
 
+  def update_avatar
+    @admin ||= Admin.find(current_user.id)
+    if @admin.update_attributes(params[:admin])
+      flash[:notice] = "Saved"
+    end
+    redirect_to admin_profile_path
+  end
+
   def update
     @admin ||= current_user
     authorize! :profile_manage, @admin

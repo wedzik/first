@@ -125,3 +125,10 @@ dd {
 body .container-fluid{
     margin-bottom: 50px;
 }
+
+.user-header-avatar{
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+}

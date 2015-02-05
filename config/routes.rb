@@ -1,11 +1,15 @@
 First::Application.routes.draw do
   namespace :admin do
     get "profile" => "admins#profile", :as => "profile"
+    put "update_avatar" => "admins#update_avatar", :as => "avatar"
+
     get "update_profile" => "admins#update_profile", :as => "update_profile"
     put "update_profile" => "admins#update"
     resources :admins, except: [:edit, :show, :update]
 
     get "super_profile" => "super_admins#profile", :as => "super_profile"
+    put "super_update_avatar" => "super_admins#update_avatar", :as => "super_avatar"
+
     get "super_update_profile" => "super_admins#update_profile", :as => "super_update_profile"
     put "super_update_profile" => "super_admins#update"
 
@@ -27,6 +31,7 @@ First::Application.routes.draw do
 
   get "sign_up" => "users#new", :as => "sign_up"
   get "profile" => "users#profile", :as => "profile"
+  put "update_avatar" => "users#update_avatar", :as => "avatar"
 
   get "reset_password/:id" => "users#reset_password", :as => "reset_password"
   put "reset_password/:id" => "users#save_password", :as => "save_password"

@@ -12,6 +12,25 @@
   <dt><strong><%= model_class.human_attribute_name(:age) %>:</strong></dt>
   <dd><%= @super_admin.age %></dd>
 </dl>
+<%= form_for @super_admin, :url=>admin_super_avatar_path, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+    <% if @super_admin.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <% for message in @super_admin.errors.full_messages %>
+              <p><%= message %></p>
+          <% end %>
+        </div>
+    <% end %>
+    <div class="control-group">
+      <%= image_tag(@super_admin.avatar_url) if @super_admin.avatar? %>
+      <%= f.label :avatar, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :avatar %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Save", :class => 'btn btn-primary' %>
+    </div>
+<% end %>
 <div class="form-actions">
   <%= link_to t('.edit', :default => t("Update profile")), admin_super_update_profile_path(:id => current_user.id),
               {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, :class => 'btn' %>

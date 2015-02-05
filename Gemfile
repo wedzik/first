@@ -28,6 +28,8 @@ gem 'twitter-bootstrap-rails'
 gem 'yaml_db'
 gem 'cancan'
 gem 'will_paginate', '~> 3.0.5'
+
+gem 'carrierwave'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

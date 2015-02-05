@@ -107,6 +107,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_avatar
+    @user ||= User.find(current_user.id)
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Saved"
+    end
+    redirect_to profile_path
+  end
+
   def update_profile
     @user ||= User.find(params[:id])
     authorize! :update_profile, @user

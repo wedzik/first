@@ -26,4 +26,12 @@ class Admin::SuperAdminsController < ApplicationController
     end
   end
 
+  def update_avatar
+    @super_admin ||= Admin.find(current_user.id)
+    if @super_admin.update_attributes(params[:super_admin])
+      flash[:notice] = "Saved"
+    end
+    redirect_to admin_profile_path
+  end
+
 end

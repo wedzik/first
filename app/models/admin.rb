@@ -1,7 +1,8 @@
 class Admin < ActiveRecord::Base
   include UserAuth
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age, :avatar
   attr_accessor :password
+  mount_uploader :avatar, AvatarUploader
 
   before_save :encrypt_password
 
