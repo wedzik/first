@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    alias_action :new, :index, :create, :destroy, :to => :crud_manage
+    alias_action :new, :index, :create, :destroy, :upload_files, :to => :crud_manage
     alias_action :profile, :update_profile, :update, :to => :profile_manage
     user ||= User.new # guest user (not logged in)
     if user.is_a? SuperAdmin

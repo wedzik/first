@@ -82,6 +82,47 @@ class UsersController < ApplicationController
     end
   end
 
+  def files
+    if current_user
+      if current_user.is_a? Admin
+        redirect_to admin_profile_path
+        return
+      end
+      flash.now[:notice] = ""
+      @user ||= User.find(current_user.id)
+      authorize! :profile, @user
+    else
+      redirect_to log_in_path
+    end
+  end
+
+  def upload_files
+      @user ||= User.find(current_user.id)
+#      authorize! :upload_files, @user
+      #@tmp = params[:user][:files]
+      @user_file = UserFile.new
+      @user_file.name = params[:files][0]
+
+
+      @user_file.user = @user;
+      @user_file.save
+      @user_file.size = File.new(@user_file.name.current_path).size
+      @user_file.save
+      @jf = JsonFile.new
+      @jf.name =  @user_file.name.identifier
+      @jf.size = @user_file.size
+      @jf.url =@user_file.name.url
+
+      @files = Array.new
+      @files << @jf
+
+      #@user.files = params[:user][:files] # Assign an array of files
+      #@user.save!
+
+      render :json => @user_file
+
+  end
+
   def reset_password
     @user ||= User.find(params[:id])
     authorize! :reset_password, @user

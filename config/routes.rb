@@ -31,6 +31,9 @@ First::Application.routes.draw do
 
   get "sign_up" => "users#new", :as => "sign_up"
   get "profile" => "users#profile", :as => "profile"
+  get "files" => "users#files", :as => "files"
+  post "upload_files" => "users#upload_files", :as => "upload_files"
+  put "upload_files" => "users#upload_files", :as => "upload_files"
   put "update_avatar" => "users#update_avatar", :as => "avatar"
 
   get "reset_password/:id" => "users#reset_password", :as => "reset_password"

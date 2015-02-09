@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
   include UserAuth
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age, :position, :avatar
+  has_many :user_files
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age, :position, :avatar, :files
   attr_accessor :password
+
+  serialize :files
   mount_uploader :avatar, AvatarUploader
   self.per_page = 7
 

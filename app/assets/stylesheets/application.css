@@ -16,8 +16,9 @@
 .page-header{
     margin: 0px;
     background:url(header.jpg), no-repeat;
-    background-position: center;
-    height: 150px;
+    background-position: bottom center;
+    background-size: cover;
+    height: 140px;
 }
 
 .page-header .site-name{
