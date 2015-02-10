@@ -108,13 +108,6 @@ class UsersController < ApplicationController
       @user_file.save
       @user_file.size = File.new(@user_file.name.current_path).size
       @user_file.save
-      @jf = JsonFile.new
-      @jf.name =  @user_file.name.identifier
-      @jf.size = @user_file.size
-      @jf.url =@user_file.name.url
-
-      @files = Array.new
-      @files << @jf
 
       #@user.files = params[:user][:files] # Assign an array of files
       #@user.save!
