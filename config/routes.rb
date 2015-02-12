@@ -32,8 +32,12 @@ First::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
   get "profile" => "users#profile", :as => "profile"
   get "files" => "users#files", :as => "files"
+
+  get "upload_files" => "users#uploaded_files", :as => "uploaded_files"
   post "upload_files" => "users#upload_files", :as => "upload_files"
-  put "upload_files" => "users#upload_files", :as => "upload_files"
+
+  delete "delete_file/:id" => "users#delete_file", :as => "delete_file"
+
   put "update_avatar" => "users#update_avatar", :as => "avatar"
 
   get "reset_password/:id" => "users#reset_password", :as => "reset_password"
@@ -41,7 +45,7 @@ First::Application.routes.draw do
 
   get "update_profile" => "users#update_profile", :as => "update_profile"
 
-  post "users" => "users#drag"
+  post "dragusers" => "users#drag", :as => "users_drag"
   resources :users, except: [:new, :edit, :show]
   root :to => "users#new"
 end

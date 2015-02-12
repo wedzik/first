@@ -31,7 +31,7 @@
     <!-- The global progress state -->
     <div class="col-lg-5 fileupload-progress fade">
       <!-- The global progress bar -->
-      <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress progress-striped active progress-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100">
         <div class="progress-bar progress-bar-success" style="width:0%;"></div>
       </div>
       <!-- The extended global progress state -->
@@ -42,7 +42,6 @@
   <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 </form>
 <br>
-
 <!-- The blueimp Gallery widget -->
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
   <div class="slides"></div>
@@ -128,25 +127,20 @@
     </tr>
 {% } %}
 </script>
-
 <script>
     $(function () {
         'use strict';
-
         // Initialize the jQuery File Upload widget:
         $('#fileupload').fileupload({
             // Uncomment the following to send cross-domain cookies:
             //xhrFields: {withCredentials: true},
             url: '<%= upload_files_path %>'
         });
-
         // Enable iframe cross-domain access via redirect option:
         $('#fileupload').fileupload(
-                'option', 'redirect',
-                window.location.href.replace( /\/[^\/]*$/, '/cors/result.html?%s' )
+                'option', 'redirect', window.location.href.replace( /\/[^\/]*$/, '/cors/result.html?%s' )
         );
-
-            // Load existing files:
+        // Load existing files:
         $('#fileupload').addClass('fileupload-processing');
         $.ajax({
             // Uncomment the following to send cross-domain cookies:
@@ -160,5 +154,4 @@
                 $(this).fileupload('option', 'done') .call(this, $.Event('done'), {result: result});
             });
     });
-
 </script>

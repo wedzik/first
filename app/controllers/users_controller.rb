@@ -97,30 +97,28 @@ class UsersController < ApplicationController
   end
 
   def upload_files
-      @user ||= User.find(current_user.id)
-#      authorize! :upload_files, @user
-      #@tmp = params[:user][:files]
-      @user_file = UserFile.new
-      @user_file.name = params[:files][0]
+    @user_file = UserFile.new
+    @user_file.name = params[:files][0]
+    @user_file.user = current_user;
+    @user_file.display_name = @user_file.name.identifier
+    @user_file.size = File.new(@user_file.name.current_path).size
+    @user_file.save
 
+    render :json => { :files => [current_user.user_files.last] }.to_json
+  end
 
-      @user_file.user = @user;
-      @user_file.save
-      @user_file.size = File.new(@user_file.name.current_path).size
-      @user_file.save
-      @jf = JsonFile.new
-      @jf.name =  @user_file.name.identifier
-      @jf.size = @user_file.size
-      @jf.url =@user_file.name.url
+  def uploaded_files
+    render :json => { :files => current_user.user_files }.to_json
+  end
 
-      @files = Array.new
-      @files << @jf
-
-      #@user.files = params[:user][:files] # Assign an array of files
-      #@user.save!
-
-      render :json => @user_file
-
+  def delete_file
+    @file = current_user.user_files.find(params[:id])
+    @file_name = @file.display_name
+    if @file && @file.destroy
+      render :json => { :files => [(@file_name.to_s).to_sym => true] }.to_json
+    else
+      render nothing: TRUE
+    end
   end
 
   def reset_password
