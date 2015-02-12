@@ -30,6 +30,8 @@ gem 'cancan'
 gem 'will_paginate', '~> 3.0.5'
 gem 'rmagick', '2.13.1'
 gem 'carrierwave', :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
+gem 'rspec-rails'
+gem 'simplecov', :require => false, :group => :test
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

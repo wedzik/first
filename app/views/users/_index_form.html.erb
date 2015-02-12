@@ -43,12 +43,11 @@
         //$( "#sortable" ).sortable();
         $("#sortable").sortable({
             update: function( event, ui ) {
-                    test = "adasd";
                     var items = $("#sortable :input").serialize();
                             $.ajax({
                                 type: "POST",
-                                url: "<%= users_url %>",
-                                data: items,
+                                url: "<%= users_drag_url %>",
+                                data: items
                             });
                         }
                     })

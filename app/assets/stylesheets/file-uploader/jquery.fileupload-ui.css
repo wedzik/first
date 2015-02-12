@@ -16,8 +16,10 @@
 }
 .progress-animated .progress-bar,
 .progress-animated .bar {
-  background: url("../img/progressbar.gif") !important;
+  background: url(progressbar.gif) !important;
   filter: none;
+  display: block;
+  height: 100%;
 }
 .fileupload-process {
   float: right;
@@ -28,7 +30,7 @@
   display: block;
   width: 32px;
   height: 32px;
-  background: url("../img/loading.gif") center no-repeat;
+  background: url(loading.gif) center no-repeat;
   background-size: contain;
 }
 .files audio,
