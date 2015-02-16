@@ -150,7 +150,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       flash[:notice] = "Saved"
     end
-    redirect_to profile_path
+    render "profile.erb"
   end
 
   def update_profile

@@ -137,3 +137,36 @@ body .container-fluid{
     top: 15px;
     right: 25px;
 }
+
+.user-avatar-preview{
+    height: 150px;
+    float: left;
+    display: block;
+}
+
+.prfile-detail{
+    width: 400px;
+    float: left;
+    display: block;
+}
+
+.bnt-right{
+    float: right;
+}
+
+.splitter {
+    float: left;
+    display: block;
+    width: 100%;
+}
+
+.profile-container{
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+.form-action-container{
+    float: left;
+    width: 100%;
+}
