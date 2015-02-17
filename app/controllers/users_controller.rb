@@ -102,8 +102,11 @@ class UsersController < ApplicationController
     @user_file.user = current_user;
     @user_file.display_name = @user_file.name.identifier
     @user_file.size = File.new(@user_file.name.current_path).size
-    @user_file.save
-    render :json => { :files => [current_user.user_files.last] }.to_json
+    if @user_file.save
+      render :json => { :files => [current_user.user_files.last] }.to_json
+    else
+      render :json => { :files => [@user_file] }.to_json
+    end
   end
 
   def uploaded_files

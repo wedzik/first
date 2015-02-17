@@ -127,10 +127,6 @@ dd {
     text-decoration: underline;
 }
 
-body .container-fluid{
-    margin-bottom: 50px;
-}
-
 .user-header-avatar{
     display: block;
     position: absolute;
@@ -140,7 +136,6 @@ body .container-fluid{
 
 .user-avatar-preview{
     height: 150px;
-    float: left;
     display: block;
 }
 

@@ -13,7 +13,7 @@ gem 'mysql2'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
@@ -24,7 +24,7 @@ end
 gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'twitter-bootstrap-rails'
+
 gem 'yaml_db'
 gem 'cancan'
 gem 'will_paginate', '~> 3.0.5'

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :user_files
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age, :position, :avatar
   attr_accessor :password
-  AVATAR_FILE_LIMIT = 1
+  AVATAR_FILE_LIMIT = 1 #1  MB
 
   mount_uploader :avatar, AvatarUploader
   self.per_page = 7
