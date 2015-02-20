@@ -1,2 +1,11 @@
-<%= render :partial => 'new_form' %>
+<%- model_class = User -%>
+<div class="row">
+    <div class="well well-lg  col-md-4 col-md-offset-4">
+        <div class="section-title text-center">
+          <h1><%=t '.title', :default => ['Log in'], :model => model_class.model_name.human.titleize %></h1>
+        </div>
+        <% @form_path = sessions_path %>
+        <%= render :partial => 'new_form' %>
+    </div>
+</div>
 

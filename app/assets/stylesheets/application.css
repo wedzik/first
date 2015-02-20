@@ -26,11 +26,13 @@
 }
 
 .page-header .site-name{
-    font-size: 48px;
+    font-size: 42px;
     font-weight: bold;
-    color: #cccccc;
-    padding: 25px;
+    color: #ffffff;
+    padding: 15px;
     display: block;
+    width: 450px;
+    float: left;
 }
 
 .page-header .site-name:hover{
@@ -66,13 +68,13 @@ dd {
     min-height: 20px;
 }
 
-.order-down{
+.asc{
     background:url(arrow_medium_down.png);
     background-repeat: no-repeat;
     background-position: right;
 }
 
-.order-up{
+.desc{
     background:url(arrow_medium_up.png);
     background-repeat: no-repeat;
     background-position: right;
@@ -164,4 +166,8 @@ dd {
 .form-action-container{
     float: left;
     width: 100%;
+}
+
+.btn-big{
+    width: 170px;
 }

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validate :file_size
 
   def file_size
-    if avatar.file.size.to_f/(1000*1000) > AVATAR_FILE_LIMIT
+    if avatar.file && avatar.file.size.to_f/(1000*1000) > AVATAR_FILE_LIMIT
       errors.add(:avatar, "You cannot upload a file greater than #{AVATAR_FILE_LIMIT.to_f}MB")
     end
   end

@@ -4,7 +4,8 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <div class="panel panel-info">
+    <div class="panel panel-default">
+      <div class="panel-heading">Detail</div>
       <div class="panel-body">
         <dl class="dl-horizontal">
           <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
@@ -26,6 +27,9 @@
     </div>
   </div>
   <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Avatar</div>
+      <div class="panel-body">
         <%= form_for @user, :url=>avatar_path, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
             <% if @user.errors.any? %>
                 <div class="alert alert-danger" role="alert">
@@ -35,12 +39,14 @@
                 </div>
             <% end %>
         <div class="form-group" style="margin-left: 0px">
-            <%= f.file_field  :class => '' %>
+          <%= f.file_field :avatar %>
         </div>
         <%= image_tag(@user.avatar_url, :class => 'img-responsive user-avatar-preview') if @user.avatar? %>
         <br/>
          <%= f.submit "Save", :class => 'btn btn-primary' %>
         <% end %>
+      </div>
+    </div>
   </div>
 </div>
 

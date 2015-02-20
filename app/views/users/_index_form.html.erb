@@ -2,14 +2,17 @@
 <div class="section-title">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+<% if sort_column == 'position' %>
+    Drag and Drop available
+<% end %>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= link_to '#', users_path(order: 'position', current: @current, direction: @direction), :remote => true, :id => "user-position-header" %></th>
-      <th><%= link_to 'ID', users_path(order: 'id', current: @current, direction: @direction), :remote => true, :id => "user-id-header" %></th>
-      <th><%= link_to 'Email', users_path(order: 'email', current: @current, direction: @direction), :remote => true, :id => "user-email-header" %></th>
-      <th><%= link_to 'First name', users_path(order: 'first_name', current: @current, direction: @direction), :remote => true, :id => "user-first_name-header"  %></th>
-      <th><%= link_to 'Last name', users_path(order: 'last_name', current: @current, direction: @direction), :remote => true, :id => "user-last_name-header"  %></th>
+      <td><%= sortable_user 'position', '#' %></td>
+      <td><%= sortable_user 'id' %></td>
+      <td><%= sortable_user 'email' %></td>
+      <td><%= sortable_user 'first_name' %></td>
+      <td><%= sortable_user 'last_name' %></td>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -38,15 +41,15 @@
 <div class="apple_pagination">
   <%= ajax_will_paginate @users %>
 </div>
+<% if sort_column == 'position' %>
 <script language="JavaScript">
     $(function() {
-        //$( "#sortable" ).sortable();
         $("#sortable").sortable({
             update: function( event, ui ) {
                     var items = $("#sortable :input").serialize();
                             $.ajax({
                                 type: "POST",
-                                url: "<%= users_drag_url %>",
+                                url: "<%= users_drag_url %>?sort=<%= sort_direction %>",
                                 data: items
                             });
                         }
@@ -54,4 +57,4 @@
         $( "#sortable" ).disableSelection();
     });
 </script>
-
+<% end %>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  helper_method :sort_column, :sort_direction
 
   def new
     if current_user
@@ -8,21 +9,10 @@ class UsersController < ApplicationController
     end
   end
 
+  #TODO: Add reset user password on ajax
+  #TODO: Om=n user create set position value max+1
   def index
-    if params[:order]
-      if  params[:direction] == 'up'
-        @users = User.paginate(:page => params[:page]).order(params[:order]+ " ASC")
-        @direction = 'down'
-      else
-        @users = User.paginate(:page => params[:page]).order(params[:order]+ " DESC")
-        @direction = 'up'
-      end
-      @current = params[:order]
-    else
-      @users = User.paginate(:page => params[:page]).order("position")
-      @current = 'id'
-      @direction = 'up'
-    end
+    @users = User.paginate(:page => params[:page]).order(sort_column + ' ' + sort_direction)
     authorize! :index, User.new
     respond_to do |format|
       format.html
@@ -40,6 +30,9 @@ class UsersController < ApplicationController
       end
     end
     positions.sort!
+    if params['sort'] == 'desc'
+      positions.reverse!
+    end
     i=0;
     items.each do |user|
       if(user.position != positions[i])
@@ -49,22 +42,20 @@ class UsersController < ApplicationController
       i+=1
     end
 
-    @users = User.paginate(:page => params[:page]).order("position")
+    @users = User.paginate(:page => params[:page]).order(sort_column + ' ' + params['sort'])
     @current = 'id'
     @direction = 'up'
-    respond_to do |format|
-      format.js
-    end
+    render 'index.js.erb'
   end
 
   def create
     @user = User.new(params[:user])
       if @user.save
-        #flash.now[:notice] = "Signed up!"
-        redirect_to log_in_path, :notice => "Signed up!"
+        flash[:notice] = 'Signed up!'
+        session[:user_id] = @user.id
+        render :js => "window.location = '#{log_in_path}'"
       else
         render "new.js"
-        #format.js
       end
   end
 
@@ -74,8 +65,7 @@ class UsersController < ApplicationController
         redirect_to admin_profile_path
         return
       end
-      flash.now[:notice] = ""
-      @user ||= User.find(current_user.id)
+      @user ||= current_user
       authorize! :profile, @user
     else
       redirect_to log_in_path
@@ -149,11 +139,14 @@ class UsersController < ApplicationController
   end
 
   def update_avatar
-    @user ||= User.find(current_user.id)
+    @user = current_user
+    authorize! :update_avatar, @user
     if @user.update_attributes(params[:user])
       flash[:notice] = "Saved"
+      redirect_to profile_path, :notice => "Saved"
+    else
+      redirect_to profile_path, :alert => @user.errors
     end
-    render "profile.erb"
   end
 
   def update_profile
@@ -175,4 +168,13 @@ class UsersController < ApplicationController
     end
   end
 
+  private
+
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "position"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

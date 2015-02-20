@@ -24,13 +24,12 @@ First::Application.routes.draw do
   get "admin/log_in" => "sessions#new_admin", :as => "log_in_admin"
   post "admin/log_in" => "sessions#create_admin", :as => "log_in_admin"
 
-  get "super/log_in" => "sessions#new_super_admin", :as => "log_in_super_admin"
-  post "super/log_in" => "sessions#create_super_admin", :as => "log_in_super_admin"
-
   get "log_out" => "sessions#destroy", :as => "log_out"
 
   get "sign_up" => "users#new", :as => "sign_up"
   get "profile" => "users#profile", :as => "profile"
+  put "profile" => "users#profile"
+
   get "files" => "users#files", :as => "files"
 
   get "upload_files" => "users#uploaded_files", :as => "uploaded_files"

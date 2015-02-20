@@ -4,12 +4,10 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-    if session[:super_admin_id]
-      @current_user = SuperAdmin.find(session[:super_admin_id])
-    elsif session[:admin_id]
-      @current_user = Admin.find(session[:admin_id])
-    elsif session[:user_id]
-      @current_user = User.find(session[:user_id])
+    if session[:user_id]
+      @current_user = SuperAdmin.find_by_id(session[:user_id])
+      @current_user ||= Admin.find_by_id(session[:user_id])
+      @current_user ||= User.find_by_id(session[:user_id])
     end
   end
 
