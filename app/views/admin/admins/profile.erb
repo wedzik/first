@@ -2,42 +2,56 @@
 <div class="section-title">
   <h1><%=t '.title', :default => 'Admin Profile' %></h1>
 </div>
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @admin.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
-  <dd><%= @admin.first_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
-  <dd><%= @admin.last_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:age) %>:</strong></dt>
-  <dd><%= @admin.age %></dd>
-</dl>
-<%= form_for @admin, :url=>admin_avatar_path, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
-    <% if @admin.errors.any? %>
-        <div class="alert alert-danger" role="alert">
-          <% for message in @admin.errors.full_messages %>
-              <p><%= message %></p>
-          <% end %>
-        </div>
-    <% end %>
-    <div class="control-group">
-      <%= image_tag(@admin.avatar_url) if @admin.avatar? %>
-      <%= f.label :avatar, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.file_field :avatar %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Detail</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+          <dd><%= @admin.email %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
+          <dd><%= @admin.first_name %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
+          <dd><%= @admin.last_name %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:age) %>:</strong></dt>
+          <dd><%= @admin.age %></dd>
+          <dt></dt>
+          <dd>
+            <%= link_to t('.edit', :default => t('Update profile')), admin_update_profile_path(:id => current_user.id),
+                        {:remote => true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window',
+                         :class => 'btn btn-primary'} %>
+          </dd>
+        </dl>
       </div>
     </div>
-    <div class="form-actions">
-      <%= f.submit "Save", :class => 'btn btn-primary' %>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Avatar</div>
+      <div class="panel-body">
+        <%= form_for @admin, :url=>admin_avatar_path, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+            <% if @admin.errors.any? %>
+                <div class="alert alert-danger" role="alert">
+                  <% for message in @admin.errors.full_messages %>
+                      <p><%= message %></p>
+                  <% end %>
+                </div>
+            <% end %>
+            <div class="form-group" style="margin-left: 0px">
+              <%= f.file_field :avatar %>
+            </div>
+            <%= image_tag(@admin.avatar_url, :class => 'img-responsive user-avatar-preview') if @admin.avatar? %>
+            <br/>
+            <%= f.submit "Save", :class => 'btn btn-primary' %>
+        <% end %>
+      </div>
     </div>
-<% end %>
-<div class="form-actions">
-  <%= link_to t('.edit', :default => t("Update profile")), admin_update_profile_path(:id => current_user.id),
-              {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, :class => 'btn' %>
+  </div>
 </div>
-<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-<script lang="" >
-    $('#modal-window').on('hidden.bs.modal', function () {
-        location.reload();
-    })
+<!-- Modal -->
+<div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<script>
+    $('#modal-window').on('hidden.bs.modal', function () { location.reload(); })
 </script>

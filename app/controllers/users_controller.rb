@@ -9,8 +9,6 @@ class UsersController < ApplicationController
     end
   end
 
-  #TODO: Add reset user password on ajax
-  #TODO: Om=n user create set position value max+1
   def index
     @users = User.paginate(:page => params[:page]).order(sort_column + ' ' + sort_direction)
     authorize! :index, User.new
@@ -124,7 +122,9 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       flash[:notice] = "Password saved for #{@user.email}"
     end
-    redirect_to users_path
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
@@ -161,15 +161,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize! :destroy, @user
     @user.destroy
-
     respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
+      format.js
     end
   end
 
   private
-
   def sort_column
     User.column_names.include?(params[:sort]) ? params[:sort] : "position"
   end

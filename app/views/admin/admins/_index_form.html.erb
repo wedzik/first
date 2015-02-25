@@ -5,18 +5,16 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= link_to '#',  admin_admins_path(order: 'position', current: @current, direction: @direction), :remote => true, :id => "admin-position-header" %></th>
-    <th><%= link_to 'ID', admin_admins_path(order: 'id', current: @current, direction: @direction), :remote => true, :id => "admin-id-header" %></th>
-    <th><%= link_to 'Email', admin_admins_path(order: 'email', current: @current, direction: @direction), :remote => true, :id => "admin-email-header" %></th>
-    <th><%= link_to 'First name', admin_admins_path(order: 'first_name', current: @current, direction: @direction), :remote => true, :id => "admin-first_name-header"  %></th>
-    <th><%= link_to 'Last name', admin_admins_path(order: 'last_name', current: @current, direction: @direction), :remote => true, :id => "admin-last_name-header"  %></th>
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    <td><%= sortable_admin 'id' %></td>
+    <td><%= sortable_admin 'email' %></td>
+    <td><%= sortable_admin 'first_name' %></td>
+    <td><%= sortable_admin 'last_name' %></td>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   <% @admins.each do |admin| %>
-      <tr>
-        <td><%= admin.position %></td>
+      <tr id="row_<%= admin.id %>">
         <td><%= admin.id %></td>
         <td><%= admin.email %></td>
         <td><%= admin.first_name %></td>
@@ -24,6 +22,7 @@
         <td>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_admin_path(admin),
+                      :remote => true,
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
@@ -32,3 +31,6 @@
   <% end %>
   </tbody>
 </table>
+<div class="apple_pagination">
+  <%= ajax_will_paginate @admins %>
+</div>

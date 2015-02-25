@@ -16,7 +16,7 @@ class UserFile < ActiveRecord::Base
   end
 
   def file_uniq
-    if UserFile.find_by_display_name(display_name)
+    if user.user_files.find_by_display_name(display_name)
       errors.add(:base  , "File already exists.")
     end
   end

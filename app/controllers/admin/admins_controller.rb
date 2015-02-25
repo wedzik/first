@@ -1,24 +1,9 @@
 class Admin::AdminsController < ApplicationController
-#  before_filter :require_admin_login , only: [:profile, :update_profile, :update]
-#  before_filter :require_super_admin_login , only: [:new, :index, :create, :destroy]
+  helper_method :sort_column, :sort_direction
 
+  #TODO: make modal SuperAdmin create admin
   def index
-#    @admins = Admin.find_all_by_type 'Admin'
-
-    if params[:order]
-      if  params[:direction] == 'up'
-        @admins = Admin.order(params[:order]+ " ASC")
-        @direction = 'down'
-      else
-        @admins = Admin.order(params[:order]+ " DESC")
-        @direction = 'up'
-      end
-      @current = params[:order]
-    else
-      @admins = Admin.all
-      @current = 'id'
-      @direction = 'up'
-    end
+    @admins = Admin.paginate(:page => params[:page]).order(sort_column + ' ' + sort_direction)
     authorize! :index, Admin.new
     respond_to do |format|
       format.html
@@ -84,9 +69,17 @@ class Admin::AdminsController < ApplicationController
     authorize! :destroy, @admin
     @admin.destroy
     respond_to do |format|
-      format.html { redirect_to admin_admins_url }
-      format.json { head :no_content }
+      format.js
     end
   end
 
+
+  private
+  def sort_column
+    Admin.column_names.include?(params[:sort]) ? params[:sort] : "email"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

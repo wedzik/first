@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   self.per_page = 7
 
   before_save :encrypt_password
+  before_create :set_position
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
@@ -24,4 +25,10 @@ class User < ActiveRecord::Base
       errors.add(:avatar, "You cannot upload a file greater than #{AVATAR_FILE_LIMIT.to_f}MB")
     end
   end
+
+  def set_position
+    @pos = User.maximum('position')
+    self.position = (@pos)?@pos+1:1
+  end
+
 end

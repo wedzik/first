@@ -13,12 +13,12 @@
       <td><%= sortable_user 'email' %></td>
       <td><%= sortable_user 'first_name' %></td>
       <td><%= sortable_user 'last_name' %></td>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody  id="sortable">
     <% @users.each do |user| %>
-      <tr>
+      <tr id="row_<%= user.id %>">
         <td><%= user.position %>
           <input type="hidden" name="<%= user.id %>" value="<%= user.position %>"/>
         </td>
@@ -29,10 +29,12 @@
         <td>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_path(user),
+                      :remote => true,
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
-          <%= link_to t('.Reset password'), reset_password_path(user), :class => 'btn btn-mini btn-info' %>
+          <%= link_to t('.Reset password'), reset_password_path(user), :class => 'btn btn-mini btn-info',
+                      :remote => true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window' %>
         </td>
       </tr>
     <% end %>
@@ -58,3 +60,6 @@
     });
 </script>
 <% end %>
+<!-- Modal -->
+<div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
