@@ -24,7 +24,7 @@ end
 gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
+gem 'therubyracer'
 gem 'yaml_db'
 gem 'cancan'
 gem 'will_paginate', '~> 3.0.5'

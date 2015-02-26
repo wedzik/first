@@ -1,0 +1,32 @@
+<%= form_for @admin, :url => admin_admins_path, remote:true, :html => { :class => 'form-horizontal' } do |f| %>
+    <%= bootstrap_flash %>
+    <% if @admin.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <% for message in @admin.errors.full_messages %>
+              <p><%= message %></p>
+          <% end %>
+        </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :email, :class => 'col-sm-4 control-label' %>
+      <div class="col-sm-8">
+        <%= f.text_field :email, :class => 'text_field form-control'%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password, nil, class: 'col-sm-4 control-label' %>
+      <div class="col-sm-8">
+        <%= f.password_field :password, :class => 'text_field form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password_confirmation, nil, class: 'col-sm-4 control-label' %>
+      <div class="col-sm-8">
+        <%= f.password_field :password_confirmation, :class => 'text_field form-control' %>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <%= f.submit nil, :class => 'btn btn-primary btn-big' %>
+      <button type="button" class="btn btn-warning btn-big" data-dismiss="modal">Cancel</button>
+    </div>
+<% end %>

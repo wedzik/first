@@ -7,31 +7,31 @@
           <% end %>
         </div>
     <% end %>
-    <div class="control-group">
-        <%= f.label :email, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :email, :class => 'text_field',:readonly => true %>
+    <div class="form-group">
+      <%= f.label :email, :class => 'col-sm-3 control-label' %>
+      <div class="col-sm-8">
+        <%= f.text_field :email, :class => 'text_field form-control',:readonly => true %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :first_name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :first_name, :class => 'text_field' %>
+    <div class="form-group">
+      <%= f.label :first_name, :class => 'col-sm-3 control-label' %>
+      <div class="col-sm-8">
+        <%= f.text_field :first_name, :class => 'text_field form-control' %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :last_name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :last_name, :class => 'text_field' %>
+    <div class="form-group">
+      <%= f.label :last_name, :class => 'col-sm-3 control-label' %>
+      <div class="col-sm-8">
+        <%= f.text_field :last_name, :class => 'text_field form-control' %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :age, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :age, :class => 'text_field' %>
+    <div class="form-group">
+      <%= f.label :age, :class => 'col-sm-3 control-label' %>
+      <div class="col-sm-8">
+        <%= f.text_field :age, :class => 'text_field form-control' %>
       </div>
     </div>
-    <div class="form-actions">
+    <div class="modal-footer">
       <%= f.submit "Save", :class => 'btn btn-primary' %>
     </div>
 <% end %>

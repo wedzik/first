@@ -1,7 +1,6 @@
 class Admin::AdminsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
-  #TODO: make modal SuperAdmin create admin
   def index
     @admins = Admin.paginate(:page => params[:page]).order(sort_column + ' ' + sort_direction)
     authorize! :index, Admin.new
@@ -58,10 +57,17 @@ class Admin::AdminsController < ApplicationController
     authorize! :create, @admin
     @admin.type = @admin.class.name
     if @admin.save
-      redirect_to admin_new_path, :notice => "Signed up!"
+      render "close_modal.js"
     else
-      render "new"
+      render "new.js"
     end
+#    if @admin.save
+  #    redirect_to admin_new_path, :notice => "Signed up!"
+ #   else
+      #respond_to do |format|
+       # format.js
+      #end
+#    end
   end
 
   def destroy
