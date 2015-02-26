@@ -22,7 +22,7 @@ First::Application.routes.draw do
   resources :sessions, only: [:create]
 
   get "admin/log_in" => "sessions#new_admin", :as => "log_in_admin"
-  post "admin/log_in" => "sessions#create_admin", :as => "log_in_admin"
+  post "admin/log_in" => "sessions#create_admin"
 
   get "log_out" => "sessions#destroy", :as => "log_out"
 
@@ -48,3 +48,4 @@ First::Application.routes.draw do
   resources :users, except: [:new, :edit, :show]
   root :to => "users#new"
 end
+
