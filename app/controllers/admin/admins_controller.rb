@@ -2,7 +2,7 @@ class Admin::AdminsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @admins = Admin.paginate(:page => params[:page]).order(sort_column + ' ' + sort_direction)
+    @admins = Admin.where(:type => Admin.name).paginate(:page => params[:page]).order(sort_column + ' ' + sort_direction)
     authorize! :index, Admin.new
     respond_to do |format|
       format.html
