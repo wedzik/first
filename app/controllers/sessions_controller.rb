@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   def create_admin
     admin = Admin.authenticate(params[:email], params[:password])
     if admin
-      session[:user_id] = admin.id
+      session[:admin_id] = admin.id
       redirect_to users_url, :notice => "Logged in as Admin!"
     else
       flash.now.alert = "Invalid admin email or password"
@@ -39,6 +39,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:admin_id] = nil
     redirect_to root_url, :notice => "Logged out!"
   end
 end

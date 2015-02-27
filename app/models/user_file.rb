@@ -1,6 +1,5 @@
 class UserFile < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :name, :size, :display_name
   mount_uploader :name, FilesUploader
   USER_FILE_LIMIT = 10 #10MB
 

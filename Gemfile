@@ -13,10 +13,9 @@ gem 'mysql2'
 group :assets do
   gem 'sass-rails',   '~> 4.0.0'
   gem 'coffee-rails', '~> 4.0.0'
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
+  #gem 'therubyracer', :platforms => :ruby
+  #gem "less-rails"
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -24,9 +23,9 @@ end
 gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'therubyracer'
 gem 'yaml_db'
 gem 'cancan'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'will_paginate', '~> 3.0.5'
 gem 'rmagick', '2.13.1'
 gem 'carrierwave', :git => 'git://github.com/carrierwaveuploader/carrierwave.git'

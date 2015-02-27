@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   include UserAuth
   has_many :user_files
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :age, :position, :avatar
   attr_accessor :password
   AVATAR_FILE_LIMIT = 1 #1  MB
 

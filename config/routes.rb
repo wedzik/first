@@ -1,17 +1,17 @@
 First::Application.routes.draw do
   namespace :admin do
     get "profile" => "admins#profile", :as => "profile"
-    put "update_avatar" => "admins#update_avatar", :as => "avatar"
+    patch "update_avatar" => "admins#update_avatar", :as => "avatar"
 
     get "update_profile" => "admins#update_profile", :as => "update_profile"
-    put "update_profile" => "admins#update"
+    patch "update_profile" => "admins#update"
     resources :admins, except: [:edit, :show, :update]
 
     get "super_profile" => "super_admins#profile", :as => "super_profile"
-    put "super_update_avatar" => "super_admins#update_avatar", :as => "super_avatar"
+    patch  "super_update_avatar" => "super_admins#update_avatar", :as => "super_avatar"
 
     get "super_update_profile" => "super_admins#update_profile", :as => "super_update_profile"
-    put "super_update_profile" => "super_admins#update"
+    patch "super_update_profile" => "super_admins#update"
 
     get "super_sign_up" => "super_admins#new", :as => "super_sign_up"
     get "new" => "admins#new", :as => "new"
@@ -37,10 +37,10 @@ First::Application.routes.draw do
 
   delete "delete_file/:id" => "users#delete_file", :as => "delete_file"
 
-  put "update_avatar" => "users#update_avatar", :as => "avatar"
+  patch "update_avatar" => "users#update_avatar", :as => "avatar"
 
   get "reset_password/:id" => "users#reset_password", :as => "reset_password"
-  put "reset_password/:id" => "users#save_password", :as => "save_password"
+  patch "reset_password/:id" => "users#save_password", :as => "save_password"
 
   get "update_profile" => "users#update_profile", :as => "update_profile"
 

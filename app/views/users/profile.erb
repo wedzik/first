@@ -18,7 +18,7 @@
           <dd><%= @user.age %></dd>
           <dt></dt>
           <dd>
-            <%= link_to t('.edit', :default => t('Update profile')), update_profile_path(:id => current_user.id),
+            <%= link_to t('Update profile'), update_profile_path(:id => current_user.id),
                         {:remote => true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window',
                          :class => 'btn btn-primary'} %>
           </dd>

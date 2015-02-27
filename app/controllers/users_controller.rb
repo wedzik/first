@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
       if @user.save
         flash[:notice] = 'Signed up!'
         session[:user_id] = @user.id
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
   def save_password
     @user ||= User.find(params[:id])
     authorize! :save_password, @user
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:notice] = "Password saved for #{@user.email}"
     end
     respond_to do |format|
@@ -131,7 +131,7 @@ class UsersController < ApplicationController
     @user ||= User.find(params[:id])
     authorize! :update, @user
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         flash[:notice] = "Saved"
       end
       format.js
@@ -141,7 +141,7 @@ class UsersController < ApplicationController
   def update_avatar
     @user = current_user
     authorize! :update_avatar, @user
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:notice] = "Saved"
       redirect_to profile_path, :notice => "Saved"
     else
@@ -173,5 +173,13 @@ class UsersController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :age, :position, :avatar)
+  end
+
+  def file_params
+    params.require(:user_file).permit(:name, :size, :display_name)
   end
 end

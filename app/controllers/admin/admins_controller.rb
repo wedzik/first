@@ -17,7 +17,7 @@ class Admin::AdminsController < ApplicationController
 
   def update_avatar
     @admin ||= Admin.find(current_user.id)
-    if @admin.update_attributes(params[:admin])
+    if @admin.update_attributes(admin_params)
       flash[:notice] = "Saved"
     end
     redirect_to admin_profile_path
@@ -27,7 +27,7 @@ class Admin::AdminsController < ApplicationController
     @admin ||= current_user
     authorize! :profile_manage, @admin
     respond_to do |format|
-      if @admin.update_attributes(params[:admin])
+      if @admin.update_attributes(admin_params)
         flash[:notice] = "Saved"
       end
       format.js
@@ -53,7 +53,7 @@ class Admin::AdminsController < ApplicationController
   end
 
   def create
-    @admin = Admin.new(params[:admin])
+    @admin = Admin.new(admin_params)
     authorize! :create, @admin
     @admin.type = @admin.class.name
     if @admin.save
@@ -61,13 +61,6 @@ class Admin::AdminsController < ApplicationController
     else
       render "new.js"
     end
-#    if @admin.save
-  #    redirect_to admin_new_path, :notice => "Signed up!"
- #   else
-      #respond_to do |format|
-       # format.js
-      #end
-#    end
   end
 
   def destroy
@@ -87,5 +80,9 @@ class Admin::AdminsController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def admin_params
+    params.require(:admin).permit(:email, :password, :password_confirmation, :first_name, :last_name, :age, :avatar)
   end
 end
