@@ -1,5 +1,4 @@
 class Admin::SuperAdminsController < ApplicationController
-  #before_filter :require_super_admin_login , only: [:profile, :update_profile, :update]
 
   def update
     @super_admin ||= current_user

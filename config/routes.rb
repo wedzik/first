@@ -33,7 +33,7 @@ First::Application.routes.draw do
   get "files" => "users#files", :as => "files"
 
   get "upload_files" => "users#uploaded_files", :as => "uploaded_files"
-  post "upload_files" => "users#upload_files", :as => "upload_files"
+  post "upload_files" => "users#upload_files"
 
   delete "delete_file/:id" => "users#delete_file", :as => "delete_file"
 

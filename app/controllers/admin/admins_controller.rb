@@ -61,13 +61,6 @@ class Admin::AdminsController < ApplicationController
     else
       render "new.js"
     end
-#    if @admin.save
-  #    redirect_to admin_new_path, :notice => "Signed up!"
- #   else
-      #respond_to do |format|
-       # format.js
-      #end
-#    end
   end
 
   def destroy
