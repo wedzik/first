@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dohoy045e
+  api_key: '727519834382491'
+  api_secret: F4gcJ2kkMlgPSPBSBRRP7hhJWuM
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dohoy045e
+  api_key: '727519834382491'
+  api_secret: F4gcJ2kkMlgPSPBSBRRP7hhJWuM
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dohoy045e
+  api_key: '727519834382491'
+  api_secret: F4gcJ2kkMlgPSPBSBRRP7hhJWuM
+  enhance_image_tag: true
+  static_image_support: false

@@ -39,9 +39,11 @@
                 </div>
             <% end %>
         <div class="form-group" style="margin-left: 0px">
+          <%= f.hidden_field :avatar_cache %>
           <%= f.file_field :avatar %>
         </div>
-        <%= image_tag(@user.avatar_url, :class => 'img-responsive user-avatar-preview') if @user.avatar? %>
+        <%= @user.avatar %>
+        <%= cl_image_tag(@user.avatar, :alt => "Avatar")  if @user.avatar? %>
         <br/>
          <%= f.submit "Save", :class => 'btn btn-primary' %>
         <% end %>
