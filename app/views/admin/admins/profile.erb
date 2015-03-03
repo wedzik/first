@@ -41,7 +41,7 @@
             <div class="form-group" style="margin-left: 0px">
               <%= f.file_field :avatar %>
             </div>
-            <%= image_tag(@admin.avatar_url, :class => 'img-responsive user-avatar-preview') if @admin.avatar? %>
+            <%= cl_image_tag(@admin.avatar, :alt => "Avatar", :class => 'img-responsive user-avatar-preview')  if @admin.avatar? %>
             <br/>
             <%= f.submit "Save", :class => 'btn btn-primary' %>
         <% end %>

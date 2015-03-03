@@ -42,8 +42,7 @@
           <%= f.hidden_field :avatar_cache %>
           <%= f.file_field :avatar %>
         </div>
-        <%= @user.avatar %>
-        <%= cl_image_tag(@user.avatar, :alt => "Avatar")  if @user.avatar? %>
+        <%= cl_image_tag(@user.avatar, :alt => "Avatar", :class => 'img-responsive user-avatar-preview')  if @user.avatar? %>
         <br/>
          <%= f.submit "Save", :class => 'btn btn-primary' %>
         <% end %>
