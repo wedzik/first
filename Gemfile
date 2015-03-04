@@ -5,8 +5,6 @@ gem 'rails', '4.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'sqlite3'
-#gem 'mysql2'
 gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,6 +30,10 @@ gem 'carrierwave', :git => 'git://github.com/carrierwaveuploader/carrierwave.git
 gem 'rspec-rails'
 gem 'simplecov', :require => false, :group => :test
 gem 'cloudinary'
+
+group :production do
+  gem 'rails_12factor'
+end
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
